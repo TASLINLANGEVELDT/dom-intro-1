@@ -1,12 +1,69 @@
-// get a reference to the textbox where the bill type is to be entered
+var billTypeText = document.querySelector('.billTypeText');
+var callsTotalElem = document.querySelector('.callTotalOne');
+var smsTotalElem = document.querySelector('.smsTotalOne');
+var totalCostElem = document.querySelector('.totalOne');
+var addToBillBtn = document.querySelector('.addToBillBtn');
 
-//get a reference to the add button
+function TextBillTotal() {
+  var billtext = {
+    sms: 0,
+    call: 0
+  };
 
-//create a variable that will keep track of the total bill
+  function calcBill(typeofBill) {
+    if (typeofBill === 'sms') {
+      billtext['sms'] += 0.75;
+    } else if (typeofBill === 'call') {
+      billtext['call'] += 2.75;
+    }
+  }
+  var CallTotal = function() {
 
-//add an event listener for when the add button is pressed
+    return billtext['call'].toFixed(1);
+  }
 
-//in the event listener check if the value in the bill type textbox is 'sms' or 'call'
-// * add the appropriate value to the running total
-// * add nothing for invalid values that is not 'call' or 'sms'.
-// * display the latest total on the screen
+  var smsTotal = function() {
+
+    return billtext['sms'].toFixed(1);
+  }
+
+  var billTotal = function() {
+
+    return (billtext['sms'] + billtext['call']).toFixed(1);
+  }
+
+  var checkBill = function(typeofBill) {
+    return {
+      sms: billtext['sms'],
+      call: billtext['call']
+    }
+  }
+
+  return {
+    calc: calcBill,
+    check: checkBill,
+    total: billTotal,
+    smsTotal: smsTotal,
+    callTotal: CallTotal
+
+  }
+}
+var textbill = TextBillTotal();
+var textbillClicked = function() {
+
+  var billTypeEntered = billTypeText.value.trim();
+  textbill.calc(billTypeEntered);
+  var totalbill = textbill.check(billTypeEntered);
+  callsTotalElem.innerHTML = (totalbill['call']).toFixed(1);
+  smsTotalElem.innerHTML = (totalbill['sms']).toFixed(1);
+  var checkTotal = (totalbill['call'] + totalbill['sms']);
+  totalCostElem.innerHTML = checkTotal.toFixed(1);
+  if (checkTotal >= 30 && checkTotal < 50) {
+    totalCostElem.classList.add("warning");
+  } else if (checkTotal >= 50) {
+    totalCostElem.classList.add("danger");
+  }
+}
+
+
+addToBillBtn.addEventListener('click', textbillClicked);
