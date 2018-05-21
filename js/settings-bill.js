@@ -1,22 +1,71 @@
-// get a reference to the sms or call radio buttons
-
+// get a reference to the sms or call bills
+var callBillElem = document.querySelector(".callTotalSettings");
+var smsBillElem = document.querySelector(".smsTotalSettings");
+var totalBillElem = document.querySelector(".totalSettings");
+//ref to bill total addToBtn
+//var settingsBillItem = document.querySelector("input[name='billItemTypeWithSettings']:checked"//);
 // get refences to all the settings fields
-
+var callCostElement = document.querySelector(".callCostSetting");
+var callTotalDisplay = document.querySelector('.callCostSetting');
+var smsCostElement = document.querySelector(".smsCostSetting");
+var smsTotalDisplay = document.querySelector(".smsTotalSettings");
+var warningCostElement = document.querySelector(".warningLevelSetting");
+var criticalCostElement = document.querySelector(".criticalLevelSetting");
 //get a reference to the add button
-
+var addBillBtn = document.querySelector(".settinsBillAddBtn");
 //get a reference to the 'Update settings' button
+var settingsUpdateBtn = document.querySelector(".updateSettings");
 
-// create a variables that will keep track of all the settings
+var callCost = 0.00;
+var smsCost = 0.00;
+var warningCost = 0.00;
+var criticalCost = 0.00;
+var callsTotal = 0.00;
+var smsTotal = 0.00;
+var total = 0.00;
 
-// create a variables that will keep track of all three totals.
+//settings
+function settingUpdates() {
+  callCost = parseFloat(callCostElement.value);
+  smsCost = parseFloat(smsCostElement.value);
+  warningCost = parseFloat(warningCostElement.value);
+  criticalCost = parseFloat(criticalCostElement.value);
+  console.log(callCost);
+  console.log(smsCost);
+  console.log(warningCost);
+  console.log(criticalCost);
+}
 
-//add an event listener for when the 'Update settings' button is pressed
+function addSettingsBill() {
+  // get the value entered in the billType textfield
+  var settingsBillItem = document.querySelector("input[name='billItemTypeWithSettings']:checked")
 
-//add an event listener for when the add button is pressed
+  var billTypeEntered = settingsBillItem.value;
+  console.log(settingsBillItem.value);
+  // update the correct total
+  if (billTypeEntered === "call") {
+    callsTotal += callCost;
+  } else if (billTypeEntered === "sms") {
+    smsTotal += smsCost;
+  }
 
-//in the event listener get the value from the billItemTypeRadio radio buttons
-// * add the appropriate value to the call / sms total
-// * add the appropriate value to the overall total
-// * add nothing for invalid values that is not 'call' or 'sms'.
-// * display the latest total on the screen.
-// * check the value thresholds and display the total value in the right color.
+  total = callsTotal + smsTotal;
+  if (total > criticalCost){
+    totalBillElem.classList.add('danger')
+  }
+  else if (total > warningCost ) {
+    totalBillElem.classList.add('warning')
+  }
+
+
+  //update the totals that is displayed on the screen.
+  callBillElem.innerHTML = callsTotal.toFixed(2);
+  smsBillElem.innerHTML = smsTotal.toFixed(2);
+  totalBillElem.innerHTML = total.toFixed(2);
+}
+
+// eventListeners for Settings click
+settingsUpdateBtn.addEventListener("click", settingUpdates);
+
+//eventListeners for Bill click
+addBillBtn.addEventListener("click", addSettingsBill);
