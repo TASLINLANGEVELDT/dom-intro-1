@@ -15,6 +15,8 @@ function totalPhoneBill(callsAndSmses) {
 }
 //link the function to a click event on the calculate button
 calculateBtn.addEventListener('click', function() {
+  billTotal.classList.remove('danger');
+  billTotal.classList.remove('warning');
   billTotal.innerHTML = totalPhoneBill(billString.value);
   if (totalPhoneBill(billString.value) > 30.00) {
     billTotal.classList.add('danger');
