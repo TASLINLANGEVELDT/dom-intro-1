@@ -36,7 +36,13 @@ function settingUpdates() {
   console.log(criticalCost);
 }
 
+
 function addSettingsBill() {
+
+  if (total >= criticalCost) {
+    disable;
+  }
+
   // get the value entered in the billType textfield
   var settingsBillItem = document.querySelector("input[name='billItemTypeWithSettings']:checked")
 
@@ -55,6 +61,7 @@ function addSettingsBill() {
   }
   else if (total > warningCost ) {
     totalBillElem.classList.add('warning')
+
   }
 
 
