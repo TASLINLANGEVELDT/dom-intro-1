@@ -40,7 +40,7 @@ function settingUpdates() {
 function addSettingsBill() {
 
   if (total >= criticalCost) {
-    disable;
+    return;
   }
 
   // get the value entered in the billType textfield
@@ -56,14 +56,18 @@ function addSettingsBill() {
   }
 
   total = callsTotal + smsTotal;
-  if (total > criticalCost){
+  if (total >= criticalCost){
     totalBillElem.classList.add('danger')
   }
-  else if (total > warningCost ) {
+    if (total < criticalCost){
+      totalBillElem.classList.remove('danger')
+    }
+ if (total >= warningCost ) {
     totalBillElem.classList.add('warning')
-
   }
-
+    if (total < warningCost){
+      totalBillElem.classList.remove('warning')
+    }
 
   //update the totals that is displayed on the screen.
   callBillElem.innerHTML = callsTotal.toFixed(2);
