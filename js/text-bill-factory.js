@@ -9,8 +9,9 @@ function textBillTotal(callsOrSmses) {
     smsTotal += 0.75;
   }
 
+  var totalCostElem = callsTotal + smsTotal;
   callTotalElem.innerHTML = callsTotal.toFixed(2);
   smsTotalElem.innerHTML = smsTotal.toFixed(2);
-  var totalCostElem = callsTotal + smsTotal;
   totalCostElem.innerHTML = totalCostElem.toFixed(2);
+  return completeTotal;
 }
