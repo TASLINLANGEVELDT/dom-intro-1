@@ -1,36 +1,32 @@
-var billTypeText = document.querySelector('.billTypeText');
-var callTotalElem = document.querySelector('.callTotalOne');
-var smsTotalElem = document.querySelector('.smsTotalOne');
-var totalCostElem = document.querySelector('.totalOne');
-var addToBtn = document.querySelector('.addToBillBtn');
+  var billTypeText = document.querySelector('.billTypeText');
+  var callTotalElem = document.querySelector('.callTotalOne');
+  var smsTotalElem = document.querySelector('.smsTotalOne');
+  var totalCostElem = document.querySelector('.totalOne');
+  var addToBtn = document.querySelector('.addToBillBtn');
 
-// these variables are global and defined outside of the Add button event listener.
-var callsTotal = 0;
-var smsTotal = 0;
+  // these variables are global and defined outside of the Add button event listener.
+  var callsTotal = 0;
+  var smsTotal = 0;
+  var totalCost = 0;
 
-// the event listener is declared below here
-function textBillTotal() {
-  // get the value entered in the billType textfield
-  var billTypeEntered = billTypeText.value.trim();
-  // update the correct total
-  if (billTypeEntered === "call") {
-    callsTotal += 2.75;
-  } else if (billTypeEntered === "sms") {
-    smsTotal += 0.75;
+  function displayTextBillElement(){
+
+    billTotal.classList.remove('danger');
+    billTotal.classList.remove('warning');
+    billTotal.innerHTML = textBillTotal(billString.value);
+
+    //color the total based on the criteria
+    if (totalCost >= 50) {
+
+      // adding the danger class will make the text red
+      totalCostElem.classList.add("danger");
+    }
+
+     else if (totalCost >= 30) {
+      totalCostElem.classList.add("warning");
+    }
+
   }
-
-  //update the totals that is displayed on the screen.
-  callTotalElem.innerHTML = callsTotal.toFixed(2);
-  smsTotalElem.innerHTML = smsTotal.toFixed(2);
-  var totalCost = callsTotal + smsTotal;
-  totalCostElem.innerHTML = totalCost.toFixed(2);
-  //color the total based on the criteria
-  if (totalCost >= 50) {
-    // adding the danger class will make the text red
-    totalCostElem.classList.add("danger");
-  } else if (totalCost >= 30) {
-    totalCostElem.classList.add("warning");
-  }
-}
-
-addToBtn.addEventListener('click', textBillTotal);
+  addToBtn.addEventListener('click', function() {
+   displayTextBillElement();
+  });
