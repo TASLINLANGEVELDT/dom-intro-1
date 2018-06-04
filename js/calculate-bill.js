@@ -9,17 +9,17 @@ var billString = document.querySelector('.billString');
     billTotal.classList.remove('warning');
     billTotal.innerHTML = totalPhoneBill(billString.value);
 
-
-    if (totalPhoneBill() > 30.00) {
-      billTotal.classList.add('danger');
-    }
-
-    else if (totalPhoneBill(billString.value) > 20.00){ //&& totalPhoneBill(billString.value) < 30.00) {
+    if (totalPhoneBill(billString.value) > 20.00){
       billTotal.classList.add('warning');
     }
 
+    if (totalPhoneBill(billString.value) >= 30.00) {
+      billTotal.classList.add('danger');
+    }
+
+
+
   }
-//link the function to a click event on the calculate button
 calculateBtn.addEventListener('click', function() {
   calculateDisplayElement();
 });

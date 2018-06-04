@@ -6,29 +6,34 @@
 
   // these variables are global and defined outside of the Add button event listener.
 
+  var textBillTotal = TextBillTotal();
 
   function displayTextBillElement(){
 
-    var billTypeEntered = billTypeText.value.trim();
+    textBillTotal.assignValue(billTypeText.value);
 
-    billTotal.classList.remove('danger');
-    billTotal.classList.remove('warning');
-    billTotal.innerHTML = textBillTotal(billString.value);
+    //var billTypeEntered = billTypeText.value.trim();
 
-    callTotalElem.innerHTML = callerTotal();
-    smsTotalElem.innerHTML = smserTotal();
+    //billTotal.innerHTML = textBillTotal(billString.value);
 
-    totalElem.innerHTML = Total();
+    callTotalElem.innerHTML = textBillTotal.callerTotal();
+    smsTotalElem.innerHTML = textBillTotal.smserTotal();
+    totalElem.innerHTML = textBillTotal.total();
+
     //color the total based on the criteria
-    if (Total() >= 50) {
+    if (textBillTotal.total() >= 50) {
       totalElem.classList.add("danger");
     }
+    if (textBillTotal.total() < 50) {
+      totalElem.classList.remove('danger');
+    }
 
-     else if (Total() >= 30) {
+    if (textBillTotal.total() >= 30) {
       totalElem.classList.add("warning");
+    }
+    if (textBillTotal.total() < 30) {
+      totalElem.classList.remove('warning');
     }
 
   }
-  addToBtn.addEventListener('click', function() {
-   displayTextBillElement();
-  });
+  addToBtn.addEventListener('click', displayTextBillElement);
