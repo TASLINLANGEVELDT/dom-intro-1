@@ -11,6 +11,6 @@ function totalPhoneBill(callsAndSmses) {
       totalBill += 2.75;
     }
   }
-  var findingTotal = totalBill.toFixed(2);
-  return findingTotal;
+  // var findingTotal = totalBill.toFixed(2);
+  return totalBill.toFixed(2);
 }

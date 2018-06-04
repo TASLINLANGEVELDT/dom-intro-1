@@ -10,7 +10,7 @@ var billString = document.querySelector('.billString');
     billTotal.innerHTML = totalPhoneBill(billString.value);
 
 
-    if (totalPhoneBill(billString.value) > 30.00) {
+    if (totalPhoneBill() > 30.00) {
       billTotal.classList.add('danger');
     }
 
