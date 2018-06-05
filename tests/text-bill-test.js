@@ -4,16 +4,16 @@ describe('TextBill', function(){
 
     var addTotal = TextBillTotal();
 
-        addTotal.calculation('call');
-        addTotal.calculation('call');
-        addTotal.calculation('sms');
-        addTotal.calculation('sms');
+        TextBillTotal('call');
+        TextBillTotal('call');
+        TextBillTotal('sms');
+        TextBillTotal('sms');
 
-      addTotal.totalCallSms();
+      TextBillTotal.smserTotal();
 
-  assert.equal(7.00, addTotal.returnTotal());
+  assert.equal(TextBillTotal, Total());
   });
-  
+
     it('should return the sms total R3.00 for 4 sms only', function(){
 
       var addSms = TextBillTotal();
