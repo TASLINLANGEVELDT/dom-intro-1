@@ -2,7 +2,7 @@ describe('SettingsBill', function(){
 
     it('should return the calls total as R6.00 for 3 calls only', function(){
 
-      var addCallValue = SettingsBill();
+      var addCallValue = settingUpdates();
 
         addCallValue.value_Call(2);
         addCallValue.value_Critical(20);

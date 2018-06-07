@@ -1,18 +1,6 @@
 describe('RadioBill', function(){
 
 
-      it('should return the sms total as R3.00 for 4 sms only', function(){
-
-        var add_Sms = RadioBill();
-
-          add_Sms.calculateCallSms('sms');
-          add_Sms.calculateCallSms('sms');
-          add_Sms.calculateCallSms('sms');
-          add_Sms.calculateCallSms('sms');
-
-      assert.equal(3.00, add_Sms.smsTotal());
-      });
-
     it('should return the calls total as R8.25 for 3 calls only', function(){
 
       var add_Calls = RadioBill();

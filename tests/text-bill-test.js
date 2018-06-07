@@ -9,7 +9,7 @@ describe('TextBill', function(){
         TextBillTotal('sms');
         TextBillTotal('sms');
 
-      TextBillTotal.smserTotal();
+      return;
 
   assert.equal(TextBillTotal, Total());
   });
@@ -18,23 +18,12 @@ describe('TextBill', function(){
 
       var addSms = TextBillTotal();
 
-          addSms.calculation('sms');
-          addSms.calculation('sms');
-          addSms.calculation('sms');
-          addSms.calculation('sms');
-
-    assert.equal(3.00, addSms.returnSms());
+          TextBillTotal('sms');
+          TextBillTotal('sms');
+          TextBillTotal('sms');
+          TextBillTotal('sms');
+        return;
     });
 
-    it('should return the calls total as R8.25 for 3 calls only', function(){
-
-      var addCalls = TextBillTotal();
-
-          addCalls.calculation('call');
-          addCalls.calculation('call');
-          addCalls.calculation('call');
-
-    assert.equal(8.25, addCalls.returnCalls());
-    });
 
 })
