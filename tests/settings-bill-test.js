@@ -1,81 +1,24 @@
 describe('SettingsBill', function(){
 
-    it('should return the calls total as R6.00 for 3 calls only', function(){
+    it('should return the calls total as R8.25 for 3 calls only', function(){
 
-      var addCallValue = settingUpdates();
+          assert.equal(totalPhoneBill("call,call,call,"), 8.25)
 
-        addCallValue.value_Call(2);
-        addCallValue.value_Critical(20);
-
-        addCallValue.calculate_CallSms('call');
-        addCallValue.calculate_CallSms('call');
-        addCallValue.calculate_CallSms('call');
-
-    assert.equal(6.00, addCallValue.calculatedCalls());
     });
 
-    it('should return the sms total as R4.00 for 4 sms only', function(){
+    it('should return the sms total as R3.00 for 4 sms only', function(){
 
-      var addSmsValue = SettingsBill();
 
-        addSmsValue.value_Sms(1);
-        addSmsValue.value_Critical(20);
-
-        addSmsValue.calculate_CallSms('sms');
-        addSmsValue.calculate_CallSms('sms');
-        addSmsValue.calculate_CallSms('sms');
-        addSmsValue.calculate_CallSms('sms');
-
-    assert.equal(4.00, addSmsValue.calculatedSms());
+          assert.equal(totalPhoneBill("sms,sms,sms,sms"), 3.00)
     });
 
-    it('should return the grand total as R18.00 for 2 sms and 2 calls', function(){
+    it('should return the grand total as R7.00 for 2 sms and 2 calls', function(){
 
-      var addTotalValues = SettingsBill();
-
-        addTotalValues.value_Call(5);
-        addTotalValues.value_Sms(4);
-        addTotalValues.value_Critical(20);
-
-        addTotalValues.calculate_CallSms('call');
-        addTotalValues.calculate_CallSms('call');
-        addTotalValues.calculate_CallSms('sms');
-        addTotalValues.calculate_CallSms('sms');
-
-        addTotalValues.calculate_Total();
-
-        assert.equal(10.00, addTotalValues.calculatedCalls());
-        assert.equal(8.00, addTotalValues.calculatedSms());
-        assert.equal(18.00, addTotalValues.calculatedTotal());
+      assert.equal(totalPhoneBill("sms,sms,call,call"), 7.00)
     });
 
-    it('should stop calculating immediately after critical level value is reached', function(){
+    it('should stop calculating immediately after critical level value (15) is reached', function(){
 
-      var threshold = SettingsBill();
-
-        threshold.value_Critical(20);
-        threshold.value_Call(5);
-        threshold.value_Sms(4);
-
-        threshold.calculate_CallSms('call');
-            threshold.calculate_Total();
-
-        threshold.calculate_CallSms('call');
-            threshold.calculate_Total();
-
-        threshold.calculate_CallSms('sms');
-            threshold.calculate_Total();
-
-        threshold.calculate_CallSms('sms');
-            threshold.calculate_Total();
-
-        threshold.calculate_CallSms('call');
-            threshold.calculate_Total();
-
-        threshold.calculate_CallSms('sms');
-        threshold.calculate_CallSms('call');
-            threshold.calculate_Total();
-
-        assert.equal(23.00, threshold.calculatedTotal());
+      assert.equal(totalPhoneBill("sms,sms,call,call,sms,call,sms,call,call"), 16.75)
     });
 });
