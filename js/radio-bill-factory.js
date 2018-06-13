@@ -1,29 +1,37 @@
 function radioBill() {
 
-  var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
+  var callsTotalR = 0;
+  var smsTotalR = 0;
+  var totalCostR = 0;
 
-  if (checkedRadioBtn) {
-    var radioBtn = checkedRadioBtn.value;
+  function billCalculate(string) {
 
-    if (radioBtn === "call") {
+    if (string === "call") {
       callsTotalR += 2.75;
-    }
-     else if (radioBtn === "sms") {
+      totalCostR += 2.75;
+    } else if (string === "sms") {
       smsTotalR += 0.75;
-    }
-    if (totalCostR >= 50) {
-      radioTotal.classList.add("danger");
-    }
-
-     else if (totalCostR >= 30) {
-      radioTotal.classList.add("warning");
+      totalCostR += 0.75;
     }
   }
 
 
-  radioCallTotal.innerHTML = callsTotalR.toFixed(2);
-  radioSmsTotal.innerHTML = smsTotalR.toFixed(2);
-  totalCostR = callsTotalR + smsTotalR;
-  radioTotal.innerHTML = totalCostR.toFixed(2);
-  return radioTotal;
+  function getCallTotal() {
+    return callsTotalR;
+  }
+
+  function getSmsTotal() {
+    return smsTotalR;
+  }
+
+  function getTotal() {
+    return totalCostR;
+  }
+
+  return {
+    billCalculate,
+    getCallTotal,
+    getSmsTotal,
+    getTotal
+  }
 }

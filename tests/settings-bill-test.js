@@ -1,24 +1,59 @@
-describe('SettingsBill', function(){
-
-    it('should return the calls total as R8.25 for 3 calls only', function(){
-
-          assert.equal(totalPhoneBill("call,call,call,"), 8.25)
-
-    });
-
-    it('should return the sms total as R3.00 for 4 sms only', function(){
+describe('settingsBill', function(){
+  it("'The function should take in a call or sms value and tally this total accordingly", function(){
 
 
-          assert.equal(totalPhoneBill("sms,sms,sms,sms"), 3.00)
-    });
+    var factorySettings = settingUpdates();
 
-    it('should return the grand total as R7.00 for 2 sms and 2 calls', function(){
+    factorySettings.costOfCall(5)
+    factorySettings.costWarning(10)
+    factorySettings.costCritical(15)
+    factorySettings.calculateBill('call');
 
-      assert.equal(totalPhoneBill("sms,sms,call,call"), 7.00)
-    });
+    assert.equal(factorySettings.totalCS(),5);
+  });
 
-    it('should stop calculating immediately after critical level value (15) is reached', function(){
+  it("'The function is testing the cost of a call and checking the total bill", function(){
 
-      assert.equal(totalPhoneBill("sms,sms,call,call,sms,call,sms,call,call"), 16.75)
-    });
+
+    var factorySettings = settingUpdates();
+
+    factorySettings.costOfCall(10)
+    factorySettings.costWarning(20)
+    factorySettings.costCritical(30)
+    factorySettings.calculateBill('call');
+
+    assert.equal(factorySettings.totalCS(),10);
+});
+    it("'The function is checking the cost of sms and call and giving the total.", function(){
+
+
+      var factorySettings = settingUpdates();
+
+      factorySettings.costOfSMS(5)
+      factorySettings.costOfCall(2)
+      factorySettings.costWarning(20)
+      factorySettings.costCritical(30)
+      factorySettings.calculateBill('call');
+      factorySettings.calculateBill('sms');
+
+      assert.equal(factorySettings.totalCS(),7);
+
+  });
+
+  it("'The function is testing whether the bill total is above critical", function(){
+
+
+    var factorySettings = settingUpdates();
+
+    factorySettings.costOfSMS(5)
+    factorySettings.costOfCall(5)
+    factorySettings.costWarning(5)
+    factorySettings.costCritical(9)
+    factorySettings.calculateBill('call');
+    factorySettings.calculateBill('sms');
+
+    assert.equal(factorySettings.totalCS(),10);
+
+});
+
 });

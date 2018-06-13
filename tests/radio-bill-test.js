@@ -1,18 +1,35 @@
 describe('RadioBill', function(){
 
+  it("The function is testing the value of call and sms and checking the total", function() {
+    var factoryRadio = radioBill();
 
-      it('should return the sms total as R3.00 for 4 sms only', function(){
+    factoryRadio.billCalculate('call');
+    factoryRadio.billCalculate('sms');
+    factoryRadio.billCalculate('call');
+    assert.equal(factoryRadio.getTotal(), 6.25);
 
-        assert.equal(totalPhoneBill("sms,sms,sms,sms"), 3.00);
-      });
+  });
 
-    it('should return the calls total as R8.25 for 3 calls only', function(){
+  it("The function is testing the value of call and giving the total", function() {
+    var factoryRadio = radioBill();
 
-    assert.equal(totalPhoneBill("call,call,call"), 8.25);
-    });
+    factoryRadio.billCalculate('call');
+    factoryRadio.billCalculate('call');
 
-    it('should return the grand total as R7.00 for 2 sms and 2 calls', function(){
+    assert.equal(factoryRadio.getTotal(), 5.50);
 
-        assert.equal(totalPhoneBill("sms,sms,call,call"), 7.00);
-    });
+  });
+
+  it("The function is adding call and sms and totalling this", function() {
+
+    var factoryRadio = radioBill();
+
+    factoryRadio.billCalculate('call');
+    factoryRadio.billCalculate('call');
+    factoryRadio.billCalculate('sms');
+    factoryRadio.billCalculate('sms');
+    assert.equal(factoryRadio.getTotal(), 7);
+
+  });
+
 });
