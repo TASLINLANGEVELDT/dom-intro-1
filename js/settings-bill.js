@@ -39,18 +39,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  settingsUpdateBtn.addEventListener("click", settingUpdates);
+});
 
-  addBillBtn.addEventListener("click", addSettingsBill);
+settingsUpdateBtn.addEventListener("click", settingUpdates);
 
-  addBillBtn.addEventListener('click', function() {
-    var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
+addBillBtn.addEventListener("click", addSettingsBill);
 
-    if (checkedRadioBtn) {
-      callBillElem.innerHTML = callsTotal.toFixed(2);
-      smsBillElem.innerHTML = smsTotal.toFixed(2);
-      totalBillElem.innerHTML = total.toFixed(2);
-    }
-    allIn();
-  });
+addBillBtn.addEventListener('click', function() {
+  var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
+
+  if (checkedRadioBtn) {
+    callBillElem.innerHTML = callsTotal.toFixed(2);
+    smsBillElem.innerHTML = smsTotal.toFixed(2);
+    totalBillElem.innerHTML = total.toFixed(2);
+  }
+  allIn();
 });

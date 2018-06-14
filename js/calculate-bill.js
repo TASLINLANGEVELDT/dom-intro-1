@@ -1,15 +1,18 @@
-var calculateBtn = document.querySelector('.calculateBtn');
-var billTotal = document.querySelector('.billTotal');
-var billString = document.querySelector('.billString');
+document.addEventListener('DOMContentLoaded', function() {
 
-  function calculateDisplayElement(){
+
+  var calculateBtn = document.querySelector('.calculateBtn');
+  var billTotal = document.querySelector('.billTotal');
+  var billString = document.querySelector('.billString');
+
+  var calculateDisplayElement = function() {
 
 
     billTotal.classList.remove('danger');
     billTotal.classList.remove('warning');
     billTotal.innerHTML = totalPhoneBill(billString.value);
 
-    if (totalPhoneBill(billString.value) > 20.00){
+    if (totalPhoneBill(billString.value) > 20.00) {
       billTotal.classList.add('warning');
     }
 
@@ -20,6 +23,6 @@ var billString = document.querySelector('.billString');
 
 
   }
-calculateBtn.addEventListener('click', function() {
-  calculateDisplayElement();
+  calculateBtn.addEventListener('click', calculateDisplayElement);
+
 });

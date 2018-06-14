@@ -2,12 +2,12 @@ describe('settingsBill', function(){
   it("'The function should take in a call or sms value and tally this total accordingly", function(){
 
 
-    var factorySettings = settingUpdates();
+    var factorySettings = factoryValues();
 
-    factorySettings.costOfCall(5)
-    factorySettings.costWarning(10)
-    factorySettings.costCritical(15)
-    factorySettings.calculateBill('call');
+    factorySettings.settingsKey(5)
+    factorySettings.settingsKey(10)
+    factorySettings.settingsKey(15)
+    factorySettings.settingsKey('call');
 
     assert.equal(factorySettings.totalCS(),5);
   });
@@ -22,7 +22,7 @@ describe('settingsBill', function(){
     factorySettings.costCritical(30)
     factorySettings.calculateBill('call');
 
-    assert.equal(factorySettings.totalCS(),10);
+    assert.equal(factorySettings.allIn(),10);
 });
     it("'The function is checking the cost of sms and call and giving the total.", function(){
 
