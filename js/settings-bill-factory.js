@@ -1,44 +1,91 @@
 function factoryValues() {
 
+  var callCost = 0.00;
+  var smsCost = 0.00;
+  var warningCost = 0.00;
+  var criticalCost = 0.00;
+  var callsTotal = 0.00;
+  var smsTotal = 0.00;
+  var total = 0.00;
 
-  function settingUpdates() {
+function updateCall(value){
+  callCost = parseFloat(value);
+  return callCost
+}
 
-    var callCost = 0.00;
-    var smsCost = 0.00;
-    var warningCost = 0.00;
-    var criticalCost = 0.00;
-    var callsTotal = 0.00;
-    var smsTotal = 0.00;
-    var total = 0.00;
+function updateSms(value){
+  smsCost = parseFloat(value);
+  return smsCost
+}
 
-    callCost = parseFloat(callCostElement.value);
-    smsCost = parseFloat(smsCostElement.value);
-    warningCost = parseFloat(warningCostElement.value);
-    criticalCost = parseFloat(criticalCostElement.value);
-    console.log(callCost);
-    console.log(smsCost);
-    console.log(warningCost);
-    console.log(criticalCost);
+function updateWarning(value){
+warningCost = parseFloat(value);
+return warningCost
+}
+
+function updateCritical(value){
+criticalCost = parseFloat(value);
+return criticalCost
+}
+
+function getCriticalValue(){
+return criticalCost
+}
+
+function getWarningValue(){
+return warningCost
+}
+
+
+
+  function addSettingsBill(value) {
+
+    if (value === "call") {
+      callsTotal += callCost;
+    } else if (value === "sms") {
+      smsTotal += smsCost;
+    }
+
+    // if (total >= criticalCost) {
+    //   return;
+    // }
+
+    // get the value entered in the billType textfield
+    // var settingsBillItem = document.querySelector("input[name='billItemTypeWithSettings']:checked")
+
+    // var billTypeEntered = settingsBillItem.value;
+    // console.log(settingsBillItem.value);
+    // update the correct total
+  }
+
+  function getCallTotal(){
+    return callsTotal;
+  }
+
+  function getSmsTotal(){
+    return smsTotal;
+  }
+
+  function getTotal(){
+    total = callsTotal + smsTotal
+    return total;
   }
 
 
-  function addSettingsBill() {
+  return {
+  //settingUpdates,
+    addSettingsBill,
+    updateCall,
+    updateSms,
 
-    if (total >= criticalCost) {
-      return;
-    }
+    updateWarning,
+    updateCritical,
+    getCriticalValue,
+    getWarningValue,
 
-    // get the value entered in the billType textfield
-    var settingsBillItem = document.querySelector("input[name='billItemTypeWithSettings']:checked")
-
-    var billTypeEntered = settingsBillItem.value;
-    console.log(settingsBillItem.value);
-    // update the correct total
-    if (billTypeEntered === "call") {
-      callsTotal += callCost;
-    } else if (billTypeEntered === "sms") {
-      smsTotal += smsCost;
-    }
+    getCallTotal,
+    getSmsTotal,
+    getTotal
   }
 
 }

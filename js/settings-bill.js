@@ -1,57 +1,64 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-  var callBillElem = document.querySelector(".callTotalSettings");
-  var smsBillElem = document.querySelector(".smsTotalSettings");
-  var totalBillElem = document.querySelector(".totalSettings");
+  //update cost settings
   var callCostElement = document.querySelector(".callCostSetting");
-  var callTotalDisplay = document.querySelector('.callCostSetting');
   var smsCostElement = document.querySelector(".smsCostSetting");
-  var smsTotalDisplay = document.querySelector(".smsTotalSettings");
+
+  //update warning levels
   var warningCostElement = document.querySelector(".warningLevelSetting");
   var criticalCostElement = document.querySelector(".criticalLevelSetting");
+
+  //Display total
+  var totalBillElem = document.querySelector(".totalSettings");
+  var smsBillElem = document.querySelector(".smsTotalSettings");
+  var callBillElem = document.querySelector(".callTotalSettings");
+
+  //buttons
   var addBillBtn = document.querySelector(".settinsBillAddBtn");
   var settingsUpdateBtn = document.querySelector(".updateSettings");
 
-  var callCost = 0.00;
-  var smsCost = 0.00;
-  var warningCost = 0.00;
-  var criticalCost = 0.00;
-  var callsTotal = 0.00;
-  var smsTotal = 0.00;
-  var total = 0.00;
 
   var settingsKey = factoryValues();
 
-  function allIn(){
-    var lastOutCome = totalBillElem.innerHTML
+  function allIn() {
+    var totalBill = settingsKey.getTotal()
 
-    if (lastOutCome >= criticalCost) {
+    if (totalBill >= settingsKey.getCriticalValue()) {
       totalBillElem.classList.add('danger')
     }
-    if (lastOutCome < criticalCost) {
+    if (totalBill < settingsKey.getCriticalValue()) {
       totalBillElem.classList.remove('danger')
     }
-    if (lastOutCome >= warningCost) {
+    if (totalBill >= settingsKey.getWarningValue()) {
       totalBillElem.classList.add('warning')
     }
-    if (lastOutCome < warningCost) {
+    if (totalBill <  settingsKey.getWarningValue()) {
       totalBillElem.classList.remove('warning')
     }
   }
 
-});
 
-settingsUpdateBtn.addEventListener("click", settingUpdates);
+  settingsUpdateBtn.addEventListener("click", function() {
+    console.log(callCostElement.value)
+    settingsKey.updateCall(callCostElement.value);
+    settingsKey.updateSms(smsCostElement.value);
+    settingsKey.updateWarning(warningCostElement.value);
+    settingsKey.updateCritical(criticalCostElement.value);
+  });
 
-addBillBtn.addEventListener("click", addSettingsBill);
+  //addBillBtn.addEventListener("click", addSettingsBill);
 
-addBillBtn.addEventListener('click', function() {
-  var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
+  addBillBtn.addEventListener('click', function() {
+    var checkedRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
 
-  if (checkedRadioBtn) {
-    callBillElem.innerHTML = callsTotal.toFixed(2);
-    smsBillElem.innerHTML = smsTotal.toFixed(2);
-    totalBillElem.innerHTML = total.toFixed(2);
-  }
-  allIn();
+    //if (checkedRadioBtn) {
+
+    settingsKey.addSettingsBill(checkedRadioBtn.value)
+
+    callBillElem.innerHTML = settingsKey.getCallTotal().toFixed(2);
+    smsBillElem.innerHTML = settingsKey.getSmsTotal().toFixed(2);
+    totalBillElem.innerHTML = settingsKey.getTotal().toFixed(2);
+    //}
+    allIn();
+  });
 });
