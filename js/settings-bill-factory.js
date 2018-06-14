@@ -1,6 +1,16 @@
+function factoryValues() {
 
-  //settings
+
   function settingUpdates() {
+
+    var callCost = 0.00;
+    var smsCost = 0.00;
+    var warningCost = 0.00;
+    var criticalCost = 0.00;
+    var callsTotal = 0.00;
+    var smsTotal = 0.00;
+    var total = 0.00;
+
     callCost = parseFloat(callCostElement.value);
     smsCost = parseFloat(smsCostElement.value);
     warningCost = parseFloat(warningCostElement.value);
@@ -29,23 +39,6 @@
     } else if (billTypeEntered === "sms") {
       smsTotal += smsCost;
     }
-
-    total = callsTotal + smsTotal;
-    if (total >= criticalCost) {
-      totalBillElem.classList.add('danger')
-    }
-    if (total < criticalCost) {
-      totalBillElem.classList.remove('danger')
-    }
-    if (total >= warningCost) {
-      totalBillElem.classList.add('warning')
-    }
-    if (total < warningCost) {
-      totalBillElem.classList.remove('warning')
-    }
-
-    //update the totals that is displayed on the screen.
-    callBillElem.innerHTML = callsTotal.toFixed(2);
-    smsBillElem.innerHTML = smsTotal.toFixed(2);
-    totalBillElem.innerHTML = total.toFixed(2);
   }
+
+}

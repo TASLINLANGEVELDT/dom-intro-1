@@ -1,29 +1,23 @@
 describe('TextBill', function(){
 
-  it('should return the grand total as R7.00 for 2 sms and 2 calls', function(){
+  it("In this function it takes in both a call and sms and once you add the two values you get a all rounded total", function() {
 
-    var addTotal = TextBillTotal();
+    var myFactoryFunct = TextBillTotalfact();
 
-        TextBillTotal('call');
-        TextBillTotal('call');
-        TextBillTotal('sms');
-        TextBillTotal('sms');
+    myFactoryFunct.assignValue('sms');
+    myFactoryFunct.assignValue('call');
 
-      return;
+    assert.equal(myFactoryFunct.total(), 3.50);
 
-  assert.equal(TextBillTotal, Total());
   });
 
-    it('should return the sms total R3.00 for 4 sms only', function(){
+  it("In this function it checks for the value of your variable and gives you a total.", function() {
 
-      var addSms = TextBillTotal();
+    var myFactoryFunct = TextBillTotalfact();
 
-          TextBillTotal('sms');
-          TextBillTotal('sms');
-          TextBillTotal('sms');
-          TextBillTotal('sms');
-        return;
-    });
+    myFactoryFunct.assignValue('sms');
 
+    assert.equal(myFactoryFunct.total(), 0.75);
 
+  });
 })

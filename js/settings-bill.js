@@ -1,19 +1,15 @@
-  // get a reference to the sms or call bills
+document.addEventListener('DOMContentLoaded', function() {
+
   var callBillElem = document.querySelector(".callTotalSettings");
   var smsBillElem = document.querySelector(".smsTotalSettings");
   var totalBillElem = document.querySelector(".totalSettings");
-  //ref to bill total addToBtn
-  //var settingsBillItem = document.querySelector("input[name='billItemTypeWithSettings']:checked"//);
-  // get refences to all the settings fields
   var callCostElement = document.querySelector(".callCostSetting");
   var callTotalDisplay = document.querySelector('.callCostSetting');
   var smsCostElement = document.querySelector(".smsCostSetting");
   var smsTotalDisplay = document.querySelector(".smsTotalSettings");
   var warningCostElement = document.querySelector(".warningLevelSetting");
   var criticalCostElement = document.querySelector(".criticalLevelSetting");
-  //get a reference to the add button
   var addBillBtn = document.querySelector(".settinsBillAddBtn");
-  //get a reference to the 'Update settings' button
   var settingsUpdateBtn = document.querySelector(".updateSettings");
 
   var callCost = 0.00;
@@ -24,8 +20,35 @@
   var smsTotal = 0.00;
   var total = 0.00;
 
-  // eventListeners for Settings click
+  function allIn(){
+    var lastOutCome = totalBillElem.innerHTML
+
+    if (lastOutCome >= criticalCost) {
+      totalBillElem.classList.add('danger')
+    }
+    if (lastOutCome < criticalCost) {
+      totalBillElem.classList.remove('danger')
+    }
+    if (lastOutCome >= warningCost) {
+      totalBillElem.classList.add('warning')
+    }
+    if (lastOutCome < warningCost) {
+      totalBillElem.classList.remove('warning')
+    }
+  }
+
   settingsUpdateBtn.addEventListener("click", settingUpdates);
 
-  //eventListeners for Bill click
   addBillBtn.addEventListener("click", addSettingsBill);
+
+  radioAddBtn.addEventListener('click', function() {
+    var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
+
+    if (checkedRadioBtn) {
+      callBillElem.innerHTML = callsTotal.toFixed(2);
+      smsBillElem.innerHTML = smsTotal.toFixed(2);
+      totalBillElem.innerHTML = total.toFixed(2);
+    }
+    allIn();
+  });
+});
