@@ -1,6 +1,7 @@
   function TextBillTotalfact() {
     var callsTotal = 0;
     var smsTotal = 0;
+    var totalCost = 0;
 
     function assignValue(callsOrSmses) {
       if (callsOrSmses === "call") {

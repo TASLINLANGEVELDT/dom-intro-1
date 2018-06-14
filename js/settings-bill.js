@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var smsTotal = 0.00;
   var total = 0.00;
 
+  var settingsKey = factoryValues();
+
   function allIn(){
     var lastOutCome = totalBillElem.innerHTML
 
@@ -41,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   addBillBtn.addEventListener("click", addSettingsBill);
 
-  radioAddBtn.addEventListener('click', function() {
+  addBillBtn.addEventListener('click', function() {
     var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
 
     if (checkedRadioBtn) {
